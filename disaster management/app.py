@@ -3,6 +3,7 @@ from flask_cors import CORS
 import json
 import os
 from math import radians, sin, cos, sqrt, atan2
+import google.generativeai as genai
 
 # Get the directory where app.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -305,5 +306,45 @@ def session_all():
     process_pending_allocations()
     print(allocations_data)
     return jsonify(allocations_data)
+
+# Set your Gemini API Key
+GEMINI_API_KEY = ""  # Replace with your actual API key
+genai.configure(api_key=GEMINI_API_KEY)
+
+# Predefined prompt (Only you can change this)
+DEFAULT_PROMPT = "You are a disaster response model named DiastroHelp anyone in need with helpful and quick advice.Do not keep asking questions; be quick and decisive.Have a warm, cautious tone. and you are based on india dont send paragraphs only sentences paragraphs only when needed bad"
+
+# Chat history storage
+chat_histories = {}
+
+# Function to generate response using Gemini API
+def get_gemini_response(user_id, user_message):
+    if user_id not in chat_histories:
+        chat_histories[user_id] = []
+
+    chat_histories[user_id].append(f"User: {user_message}")
+    chat_histories[user_id] = chat_histories[user_id][-5:]  # Keep last 5 messages
+
+    chat_history_text = "\n".join(chat_histories[user_id])
+    prompt = f"{DEFAULT_PROMPT}\n\nChat History:\n{chat_history_text}"
+
+    # Generate response
+    model = genai.GenerativeModel("gemini-1.5-pro")
+    response = model.generate_content(prompt)
+    bot_response = response.text if response else "Sorry, I’m having trouble responding right now. Try again later."
+
+    chat_histories[user_id].append(f"Bot: {bot_response}")
+    return bot_response
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_message = request.form["message"]
+    response = get_gemini_response("user1", user_message)  # Single user session
+    return jsonify({"response": response})
+
+@app.route("/")
+def home():
+    return open("index.html").read()
+
 if __name__ == '__main__':
     app.run(debug=True,host="0.0.0.0",port=5000)

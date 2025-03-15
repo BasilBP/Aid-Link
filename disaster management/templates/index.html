@@ -20,6 +20,10 @@
             font-weight: 400px;
             font-style: normal;
         }
+
+        .legend > li{
+            cursor: pointer;
+        }
        body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -31,6 +35,7 @@
             width: 80vw;
             border-radius: 23px;
             border: 5px solid black;
+            transition: all 0.5s ease-in-out;
         }
         .container {
             display: flex;
@@ -176,6 +181,322 @@
             display: none;
         }
 
+    .chat-bot{
+      width: 20vw;
+      height: 80vh;
+      background: #fff;
+      padding: 15px;
+      position: fixed;
+      bottom: -28px;
+      right: 30%;
+      transform: translateY(-10%);
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      z-index: 1000;
+      padding-top: 20px;
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+
+  .input-container {
+      display: flex;
+      margin-top: 10px;
+      width: 100%;
+  }
+
+  .input-container > input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+  }
+
+  .input-container > button {
+      padding: 8px 12px;
+      margin-left: 5px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  .input-container > button:hover {
+    background: #0056b3;
+  }
+
+  .text-area{
+    width:100%;
+    overflow-y: scroll;  
+    height: 100%;
+  }
+
+  .text-area > p{
+    width: 75%;
+    padding: 10px 8px;
+    border-radius: 8px;
+    word-wrap: break-word;
+  }
+
+  .user-text{
+    background-color: #CBCBCB;
+    text-align: start;
+
+  }
+
+  .bot-text{
+    background-color: #EEEEEE;
+    margin-left: 16%;
+  }
+
+  .cleanup-section{
+    width: 20vw;
+    height: 80vh;
+    background: #fff;
+    padding: 15px;
+    position: fixed;
+    bottom: -28px;
+    right: 25%;
+    transform: translateY(-10%);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 23px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-between;
+    z-index: 0;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .enter-coordinates{
+    font-family: "Michroma", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+
+  .coordinate-info-div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+  .coordinates-box {
+    background: #d3d3d3;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: "Michroma", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border:none;
+    width: 200px;
+  }
+
+  .add-button {
+    background: #d3d3d3;
+    border: none;
+    width: 50px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .submit-coordinates-button{
+    width:75%;
+    height:10%;
+    border: none;
+    background-color: #000;
+    border-radius: 4px;
+    color:white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .entered-coordinates{
+    width: 100%;
+    margin-top: -120px;
+  }
+
+  .entered-coordinates > p{
+    text-align:left;
+    font-family: "Michroma", sans-serif;
+  }
+
+  .entered-coordinates{
+    width: 100%;
+    margin-top: -120px;
+  }
+
+  .entered-coordinates > p{
+    text-align:left;
+    font-family: "Michroma", sans-serif;
+  }
+
+  .on{
+    z-index: 9999999;
+    opacity: 1;
+  }
+
+  .display{
+    display: none;
+  }
+
+  .marketplace-div{
+    margin-left: 10px;
+    width: 50%;
+    height:98%;
+    border-radius: 10px;
+    display: none;
+    border: 3px solid black;
+    z-index: 21333333333333333333;
+  }
+
+  .container4{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .menu{
+    display: flex;
+    align-items:end;
+    justify-content:space-between;
+    font-family: "Michroma", sans-serif;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #BBBBBB;
+    width: 100%;
+    height:50px;
+  }
+
+  .container5 > button{
+    font-family: "Michroma", sans-serif;
+    margin-right: 10px;
+    background-color: #ffffff;
+    color:white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+  }
+
+  .container5{
+    display: flex;
+  }
+
+  .cleanup-option{
+    margin-left: 10px;
+    color:#BBBBBB;
+  }
+
+  .marketplace-option{
+    margin-right: 10px;
+    color:#BBBBBB;
+  }
+
+  .option{
+    cursor: pointer;
+    border-bottom:solid 3px rgba(0, 0, 0, 0);
+  }
+
+ 
+  .cleanup-offer-container, .sell-materials-container{
+    height:200px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+    overflow-x: scroll;  
+  }
+
+  .cleanup-offers, .material-offers{
+    font-family: "Michroma", sans-serif;
+    font-size: 1rem;
+    width:200px;
+    border: solid 1px #E9E9E9;
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10px;
+    border-radius: 25px;
+    background-color: #E9E9E9;
+  }
+
+  .cleanup-offers>p{
+    font-family: "Michroma", sans-serif;
+  }
+
+  .cleanup-offers >button, .material-offers > button{
+    border: none;
+    border-radius: 10px;
+    background-color: gray;
+    color: #000;
+    font-family: "Michroma", sans-serif;
+    cursor: pointer;
+  }
+
+  .cleanup-form, .sell-materials-form{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  h2{
+    font-family: "Michroma", sans-serif;
+  }
+
+  .cleanup-form >input, .sell-materials-form >input{
+    height:38px;
+    width: 60%;
+    background-color: #FFFFFF;
+    font-family: "Michroma", sans-serif;
+    border:1px solid black;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .cleanup-submit, .sell-materials-submit{
+    border: 1px solid black;
+    border-radius: 8px;
+    width:14%;
+    height:30px;
+    color:black;
+    font-family: "Michroma", sans-serif;
+    font-size: 1rem;
+    background-color: #B5B5B5;
+    cursor: pointer;
+  }
+
+  .back-button >img{
+    height:35px;
+    width: 35px;
+  }
+
+  .material-title{
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+
     </style>
 </head>
 <body>
@@ -186,17 +507,75 @@
         </div>
         <div class="container2">
             <div class="sidebar">
-                <ul>
+                <ul class="legend">
                     <li>Home</li>
                     <li>Inventory</li>
                     <li>Live Tracker</li>
                     <li>Settings</li>
-                    <li>Help</li>
+                    <li class="help-button">Help</li>
+                    <li class="cleanup-button">Cleanup</li>
                 </ul>
             </div>
             <div class="main-content">
                 <div id="map"></div>
-                <div class="info-panel">
+                <div class="info-panel"></div>
+                <div class="chat-bot">
+          
+                    <div class="text-area">
+                      <p class="bot-text">Hey There! How can I be of assistance?</p>
+                    </div>
+          
+                    <div class="input-container">
+                      <input type="text" class="send-text" id="userInput" placeholder="Type a message...." >
+                      <button class="send-button">Send!</button>
+                    </div>
+                </div>
+                <div class="cleanup-section">
+                    <div class="container3">
+                        <p class="enter-coordinates">ENTER COORDINATES</p>
+                        <div class="coordinate-info-div">
+                            <input class="coordinates-box" placeholder="Coordinates" type="text"></input>
+                            <button class="add-button">+</button>
+                        </div>
+                    </div>
+                    <div class="entered-coordinates">
+                    </div>
+                    
+                    <button class="submit-coordinates-button">
+                      SUBMIT
+                    </button>  
+                </div>
+                <div class="marketplace-div">
+                    <div class="container4">
+                      <div class="menu">
+                        <div class="container5 cleanup-option">
+                          <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
+                          <div class="option option-cleanup" data-option-id="1" style="border-bottom-color: black;">Cleanup</div>
+                        </div>
+                        <div class="container5-options marketplace-option option" data-option-id="2">
+                          Marketplace
+                        </div>
+                      </div>
+                      <div class="cleanup-offer-container">
+                        <div class="cleanup-offers">
+                          <p>Downtown Area</p>
+                          <p>Status: Open!</p>
+                          <button>View Bids</button>
+                        </div>
+                        <div class="cleanup-offers">
+                          <p>Downtown Area</p>
+                          <p>Status: Open!</p>
+                          <button>View Bids</button>
+                        </div>  
+                      </div>
+                      <div class="cleanup-form">
+                        <h2>Apply for Cleanup</h2>
+                        <input type="text" placeholder="Company Name">
+                        <input type="text" placeholder="Contact Info">
+                        <input type="text" placeholder="Bid Amount">
+                        <button class="cleanup-submit">Submit</button>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -208,9 +587,11 @@
     
             document.querySelector(".sidebar li:nth-child(1)").addEventListener("click", function() {
                 infoPanel.style.display = "none"; 
+                changeMapWidth();
             });
     
             document.querySelector(".sidebar li:nth-child(2)").addEventListener("click", function() {
+                changeMapWidth();
                 fetch('/get_inventory')
                     .then(response => response.json())
                     .then(data => {
@@ -305,7 +686,198 @@
                 })
                 .catch(error => console.error("Error fetching allocations:", error));
         }
+
+
+        document.querySelector(".help-button").addEventListener("click",(event)=>{
+            event.preventDefault()
+            const map = document.getElementById("map").style.width = "30vw";
+            const infoPanel = document.querySelector(".info-panel");
+            infoPanel.style.display = "none";
+            setTimeout(()=>{
+            const chatbot = document.querySelector('.chat-bot');
+            chatbot.style.opacity="1"
+            }, 550);
+        })
     
+        
+    document.querySelector('.send-button').addEventListener('click',()=>{
+      const text = document.getElementById("userInput")
+      const textArea = document.querySelector(".text-area")
+      let html = textArea.innerHTML;
+      html += `<p class="user-text">${text.value}</p>`
+      textArea.innerHTML = ``;
+      textArea.innerHTML += html;
+      text.value = ``; 
+      sendMessage();
+    });
+
+    async function sendMessage() {
+      var userInput = document.getElementById("userInput").value;
+      fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: "message=" + encodeURIComponent(userInput),
+      })
+      .then(response => response.json())
+      .then(data => {
+        const textArea = document.querySelector(".text-area")
+        let html = textArea.innerHTML;
+        html += `<p class="bot-text">${data.response}</p>`
+        textArea.innerHTML = ``;
+        textArea.innerHTML += html;
+        textArea.scrollTop = textArea.scrollHeight
+      })
+      .catch(error => {
+          console.error("Error:", error);
+      });
+  }
+
+  document.querySelector(".cleanup-button").addEventListener("click",(event)=>{
+      event.preventDefault()
+      const map = document.getElementById("map").style.width = "30vw";
+      const infoPanel = document.querySelector(".info-panel");
+      infoPanel.style.display = "none";
+      document.querySelector('.chat-bot').style.opacity = '0';
+      setTimeout(() => {
+        document.querySelector('.cleanup-section').classList.add('on');
+      }, 500);
+    })
+
+    document.querySelector(".help-button").addEventListener("click",(event)=>{
+      event.preventDefault()
+      const map = document.getElementById("map").style.width = "30vw";
+      const infoPanel = document.querySelector(".info-panel");
+      document.querySelector('.cleanup-section').classList.remove('on')
+      infoPanel.style.display = "none";
+      setTimeout(()=>{
+        const chatbot = document.querySelector('.chat-bot');
+        chatbot.style.opacity="1"
+      }, 550);
+    })
+    
+    document.querySelector('.add-button').addEventListener('click',(event)=>{
+        event.preventDefault()
+        const container = document.querySelector('.coordinates-box')
+        let coordinate = container.value;
+        container.value = ``;
+        const container2 = document.querySelector('.entered-coordinates')
+        let html = container2.innerHTML
+        html += ` <p>${coordinate}</p>`
+        container2.innerHTML = ``;
+        container2.innerHTML = html
+    });
+
+    document.querySelector('.submit-coordinates-button').addEventListener('click',(event)=>{
+          event.preventDefault()
+          document.querySelector('.sidebar').classList.add('display');
+          document.querySelector('.cleanup-section').classList.add('display');
+          document.querySelector('.marketplace-div').style.display='initial'
+          document.querySelector('.marketplace-div').classList.add('on');
+        })
+
+        document.querySelector('.back-button').addEventListener('click',(event)=>{
+          event.preventDefault()
+          document.querySelector('.sidebar').classList.remove('display');
+          document.querySelector('.cleanup-section').classList.remove('display');
+          document.querySelector('.marketplace-div').style.display='none'
+          document.querySelector('.marketplace-div').classList.remove('on');
+        })
+
+        document.querySelector('.add-button').addEventListener('click',(event)=>{
+        event.preventDefault()
+        const container = document.querySelector('.coordinates-box')
+        let coordinate = container.value;
+        container.value = ``;
+        const container2 = document.querySelector('.entered-coordinates')
+        let html = container2.innerHTML
+        html += ` <p>${coordinate}</p>`
+        container2.innerHTML = ``;
+        container2.innerHTML = html
+        });
+
+
+    function changeMapWidth(){
+      const map = document.getElementById("map").style.width = "80vw";
+      document.querySelector('.chat-bot').style.opacity = '0';
+      document.querySelector('.cleanup-section').classList.remove('on')
+    }
+
+    document.addEventListener("click", (event)=>{
+      if (event.target.matches(".marketplace-option")) {
+        document.querySelector('.marketplace-div').innerHTML = `
+        <div class="container4">
+                  <div class="menu">
+                    <div class="container5 cleanup-option">
+                      <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
+                      <div class="option option-cleanup" data-option-id="1" >Cleanup</div>
+                    </div>
+                    <div class="container5-options marketplace-option option" data-option-id="2" style="border-bottom:3px solid black">
+                      Marketplace
+                    </div>
+                  </div>
+                  <div class="sell-materials-container">
+                    <div class="material-offers">
+                      <h3 class="material-title">Recycled Bricks</h3>
+                      <p>Price: 200$/tonne</p>
+                      <p>Qty: 8 tonne</p>
+                      <button>BUY</button>
+                    </div>
+                  </div>
+                  <div class="sell-materials-form">
+                    <h2>Sell Materials</h2>
+                    <input type="text" placeholder="Contact Info">
+                    <input type="text" placeholder="Material Name">
+                    <input type="text" placeholder="Price Per Tonne">
+                    <input type="text" placeholder="Quantity">  
+                    <button class="sell-materials-submit">Submit</button>
+                  </div>
+                </div>
+      `;   
+    }
+    if (event.target.matches(".option-cleanup")){
+      document.querySelector('.marketplace-div').innerHTML = `
+           <div class="container4">
+                      <div class="menu">
+                        <div class="container5 cleanup-option">
+                          <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
+                          <div class="option option-cleanup" data-option-id="1" style="border-bottom:3px solid black">Cleanup</div>
+                        </div>
+                        <div class="container5-options marketplace-option option" data-option-id="2" >
+                          Marketplace
+                        </div>
+                      </div>
+                      <div class="cleanup-offer-container">
+                        <div class="cleanup-offers">
+                          <p>Downtown Area</p>
+                          <p>Status: Open!</p>
+                          <button>View Bids</button>
+                        </div>
+                        <div class="cleanup-offers">
+                          <p>Downtown Area</p>
+                          <p>Status: Open!</p>
+                          <button>View Bids</button>
+                        </div>  
+                      </div>
+                      <div class="cleanup-form">
+                        <h2>Apply for Cleanup</h2>
+                        <input type="text" placeholder="Company Name">
+                        <input type="text" placeholder="Contact Info">
+                        <input type="text" placeholder="Bid Amount">
+                        <button class="cleanup-submit">Submit</button>
+                      </div>
+                    </div>
+          `;
+    }
+    if(event.target.matches(".back-button")){
+          event.preventDefault()
+          document.querySelector('.sidebar').classList.remove('display');
+          document.querySelector('.cleanup-section').classList.remove('display');
+          document.querySelector('.marketplace-div').style.display='none'
+          document.querySelector('.marketplace-div').classList.remove('on');
+        }
+  });
+    
+
         document.addEventListener("DOMContentLoaded", initMap);
     </script>
     
