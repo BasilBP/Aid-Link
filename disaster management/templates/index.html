@@ -582,6 +582,7 @@
     </div>
     
     <script>
+        let materialList = JSON.parse(localStorage.getItem('buildingMaterials')) || [];
         document.addEventListener("DOMContentLoaded", function() {
             const infoPanel = document.querySelector(".info-panel");
     
@@ -805,7 +806,7 @@
     document.addEventListener("click", (event)=>{
       if (event.target.matches(".marketplace-option")) {
         document.querySelector('.marketplace-div').innerHTML = `
-        <div class="container4">
+       <div class="container4">
                   <div class="menu">
                     <div class="container5 cleanup-option">
                       <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
@@ -816,19 +817,14 @@
                     </div>
                   </div>
                   <div class="sell-materials-container">
-                    <div class="material-offers">
-                      <h3 class="material-title">Recycled Bricks</h3>
-                      <p>Price: 200$/tonne</p>
-                      <p>Qty: 8 tonne</p>
-                      <button>BUY</button>
-                    </div>
+                  ${getSellMaterial()}
                   </div>
                   <div class="sell-materials-form">
                     <h2>Sell Materials</h2>
-                    <input type="text" placeholder="Contact Info">
-                    <input type="text" placeholder="Material Name">
-                    <input type="text" placeholder="Price Per Tonne">
-                    <input type="text" placeholder="Quantity">  
+                    <input type="text" placeholder="Contact Info" id="contact-info">
+                    <input type="text" placeholder="Material Name" id="material-name">
+                    <input type="text" placeholder="Price Per Tonne" id="price">
+                    <input type="text" placeholder="Quantity" id="qty">  
                     <button class="sell-materials-submit">Submit</button>
                   </div>
                 </div>
@@ -875,8 +871,56 @@
           document.querySelector('.marketplace-div').style.display='none'
           document.querySelector('.marketplace-div').classList.remove('on');
         }
+        if(event.target.matches(".sell-materials-submit")){
+        event.preventDefault()
+        let contactInfo = document.getElementById('contact-info').value;
+        let materialName = document.getElementById('material-name').value;
+        let price = document.getElementById('price').value;
+        let qty = document.getElementById('qty').value;
+        let form = {
+          contactInfo:contactInfo,
+          materialName:materialName,
+          price:price,
+          qty:qty
+        }
+        materialList.push({
+          contactInfo:contactInfo,
+          materialName:materialName,
+          price:price,
+          qty:qty
+        });
+        localStorage.setItem('buildingMaterials',JSON.stringify(materialList))
+        generateSellMaterialHtml(form);
+    }
   });
     
+      function generateSellMaterialHtml(form){
+        let div = document.querySelector('.sell-materials-container')
+        let html = div.innerHTML || ``;
+        html+=`<div class="material-offers">
+                      <h3 class="material-title">${form.materialName}</h3>
+                      <p>Price: ${form.price}$/tonne</p>
+                      <p>Qty: ${form.qty} tonne</p>
+                      <button>BUY</button>
+                    </div>`;
+        div.innerHTML = html;
+
+      }
+
+      function getSellMaterial(){
+        let html = ``;
+        console.log(materialList)
+        materialList.forEach((item)=>{
+          html += `<div class="material-offers">
+                      <h3 class="material-title">${item.materialName}</h3>
+                      <p>Price: ${item.price}$/tonne</p>
+                      <p>Qty: ${item.qty} tonne</p>
+                      <button>BUY</button>
+                    </div>`
+        })
+        return html;
+      }
+
 
         document.addEventListener("DOMContentLoaded", initMap);
     </script>
