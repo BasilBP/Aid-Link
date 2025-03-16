@@ -546,37 +546,45 @@
                     </button>  
                 </div>
                 <div class="marketplace-div">
-                    <div class="container4">
-                      <div class="menu">
-                        <div class="container5 cleanup-option">
-                          <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
-                          <div class="option option-cleanup" data-option-id="1" style="border-bottom-color: black;">Cleanup</div>
-                        </div>
-                        <div class="container5-options marketplace-option option" data-option-id="2">
-                          Marketplace
-                        </div>
+                  <div class="container4">
+                    <div class="menu">
+                      <div class="container5 cleanup-option">
+                        <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
+                        <div class="option option-cleanup" data-option-id="1" style="border-bottom-color: black;">Cleanup</div>
                       </div>
-                      <div class="cleanup-offer-container">
-                        <div class="cleanup-offers">
-                          <p>Downtown Area</p>
-                          <p>Status: Open!</p>
-                          <button>View Bids</button>
-                        </div>
-                        <div class="cleanup-offers">
-                          <p>Downtown Area</p>
-                          <p>Status: Open!</p>
-                          <button>View Bids</button>
-                        </div>  
-                      </div>
-                      <div class="cleanup-form">
-                        <h2>Apply for Cleanup</h2>
-                        <input type="text" placeholder="Company Name">
-                        <input type="text" placeholder="Contact Info">
-                        <input type="text" placeholder="Bid Amount">
-                        <button class="cleanup-submit">Submit</button>
+                      <div class="container5-options marketplace-option option" data-option-id="2">
+                        Marketplace
                       </div>
                     </div>
-                </div>
+                    <div class="cleanup-offer-container">
+                      <div class="cleanup-offers" data-area="Downtown">
+                        <p><strong>Downtown Area</strong></p>
+                        <p>Status: <span class="status">Open!</span></p>
+                        <p>Lowest Bid: $<span class="lowest-bid">--</span></p>
+                        <button>View Bids</button>
+                    </div>
+        
+                    <div class="cleanup-offers" data-area="Suburban">
+                        <p><strong>Suburban Area</strong></p>
+                        <p>Status: <span class="status">Open!</span></p>
+                        <p>Lowest Bid: $<span class="lowest-bid">--</span></p>
+                        <button>View Bids</button>
+                        <select class="bid-list" style="display: none;"></select>
+                    </div>  
+                    </div>
+                    <div class="cleanup-form">
+                      <h2>Apply for Cleanup</h2>
+                      <input type="text" id="company-name" placeholder="Company Name">
+                      <input type="text" id="contact-info" placeholder="Contact Info">
+                      <input type="number" id="bid-amount" placeholder="Bid Amount">
+                      <select id="area-select">
+                          <option value="Downtown">Downtown Area</option>
+                          <option value="Suburban">Suburban Area</option>
+                      </select>
+                      <button class="cleanup-submit">Submit</button>
+                  </div>
+                  </div>
+              </div>
             </div>
         </div>
     </div>
@@ -584,6 +592,33 @@
     <script>
         let materialList = JSON.parse(localStorage.getItem('buildingMaterials')) || [];
         document.addEventListener("DOMContentLoaded", function() {
+          const bids = {
+                      Downtown: Infinity, 
+                      Suburban: Infinity
+                  };
+              
+                  document.querySelector(".cleanup-submit").addEventListener("click", function () {
+                      const companyName = document.getElementById("company-name").value.trim();
+                      const contactInfo = document.getElementById("contact-info").value.trim();
+                      const bidAmount = parseFloat(document.getElementById("bid-amount").value);
+                      const selectedArea = document.getElementById("area-select").value;
+              
+                      if (!companyName || !contactInfo || isNaN(bidAmount) || bidAmount <= 0) {
+                          alert("Please enter valid details.");
+                          return;
+                      }
+              
+                      if (bidAmount < bids[selectedArea]) {
+                          bids[selectedArea] = bidAmount;
+                          document.querySelector(`.cleanup-offers[data-area="${selectedArea}"] .lowest-bid`).textContent = bidAmount;
+                      }
+              
+                      alert("Bid placed successfully!");
+                      document.getElementById("company-name").value = "";
+                      document.getElementById("contact-info").value = "";
+                      document.getElementById("bid-amount").value = "";
+                  });
+
             const infoPanel = document.querySelector(".info-panel");
     
             document.querySelector(".sidebar li:nth-child(1)").addEventListener("click", function() {
@@ -836,31 +871,39 @@
                       <div class="menu">
                         <div class="container5 cleanup-option">
                           <button class="back-button"><img class="back-button" src="https://cdn-icons-png.flaticon.com/512/93/93634.png"></button>
-                          <div class="option option-cleanup" data-option-id="1" style="border-bottom:3px solid black">Cleanup</div>
+                          <div class="option option-cleanup" data-option-id="1" style="border-bottom-color: black;">Cleanup</div>
                         </div>
-                        <div class="container5-options marketplace-option option" data-option-id="2" >
+                        <div class="container5-options marketplace-option option" data-option-id="2">
                           Marketplace
                         </div>
                       </div>
                       <div class="cleanup-offer-container">
-                        <div class="cleanup-offers">
-                          <p>Downtown Area</p>
-                          <p>Status: Open!</p>
+                        <div class="cleanup-offers" data-area="Downtown">
+                          <p><strong>Downtown Area</strong></p>
+                          <p>Status: <span class="status">Open!</span></p>
+                          <p>Lowest Bid: $<span class="lowest-bid">--</span></p>
                           <button>View Bids</button>
-                        </div>
-                        <div class="cleanup-offers">
-                          <p>Downtown Area</p>
-                          <p>Status: Open!</p>
+                      </div>
+          
+                      <div class="cleanup-offers" data-area="Suburban">
+                          <p><strong>Suburban Area</strong></p>
+                          <p>Status: <span class="status">Open!</span></p>
+                          <p>Lowest Bid: $<span class="lowest-bid">--</span></p>
                           <button>View Bids</button>
-                        </div>  
+                          <select class="bid-list" style="display: none;"></select>
+                      </div>  
                       </div>
                       <div class="cleanup-form">
                         <h2>Apply for Cleanup</h2>
-                        <input type="text" placeholder="Company Name">
-                        <input type="text" placeholder="Contact Info">
-                        <input type="text" placeholder="Bid Amount">
+                        <input type="text" id="company-name" placeholder="Company Name">
+                        <input type="text" id="contact-info" placeholder="Contact Info">
+                        <input type="number" id="bid-amount" placeholder="Bid Amount">
+                        <select id="area-select">
+                            <option value="Downtown">Downtown Area</option>
+                            <option value="Suburban">Suburban Area</option>
+                        </select>
                         <button class="cleanup-submit">Submit</button>
-                      </div>
+                    </div>
                     </div>
           `;
     }
